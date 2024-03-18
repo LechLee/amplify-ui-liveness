@@ -1,6 +1,6 @@
-import { FaceMatchState } from '../service';
-import { InstructionDisplayText, ErrorDisplayText, HintDisplayText, StreamDisplayText, CameraDisplayText } from '../displayText';
-import { FaceLivenessDetectorComponents } from '../shared/DefaultStartScreenComponents';
+import { FaceMatchState } from "../service";
+import { InstructionDisplayText, ErrorDisplayText, HintDisplayText, StreamDisplayText, CameraDisplayText } from "../displayText";
+import { FaceLivenessDetectorComponents } from "../shared/DefaultStartScreenComponents";
 export declare const selectVideoConstraints: import("../hooks").LivenessSelectorFn<MediaTrackConstraints>;
 export declare const selectVideoStream: import("../hooks").LivenessSelectorFn<MediaStream>;
 export declare const selectFaceMatchPercentage: import("../hooks").LivenessSelectorFn<number>;

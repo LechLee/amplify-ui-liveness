@@ -135,7 +135,7 @@ export const defaultLivenessDisplayText: Required<LivenessDisplayText> = {
   photosensitivyWarningLabelText: 'More information about photosensitivity',
   retryCameraPermissionsText: 'Retry',
   recordingIndicatorText: 'Rec',
-  startScreenBeginCheckText: 'Start',
+  startScreenBeginCheckText: 'Start Video',
   tooFarCaptionText: 'Too far',
   tooFarAltText:
     "Illustration of a person's face inside of an oval; there is a gap between the perimeter of the face and the boundaries of the oval.",
