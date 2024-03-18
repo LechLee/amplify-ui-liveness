@@ -27,7 +27,8 @@
     "size": "yarn size-limit",
     "test": "jest",
     "test:watch": "yarn test --watch",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "postinstall": "npm run build"
   },
   "peerDependencies": {
     "react": "^16.14.0 || ^17.0 || ^18.0",
