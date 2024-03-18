@@ -1,5 +1,5 @@
-import React, { useState, useRef } from 'react';
-import { classNames } from '@aws-amplify/ui';
+import React, { useState, useRef } from "react";
+import { classNames } from "@aws-amplify/ui";
 
 import {
   Button,
@@ -9,36 +9,36 @@ import {
   SelectField,
   Text,
   View,
-} from '@aws-amplify/ui-react';
-import { useColorMode } from '@aws-amplify/ui-react/internal';
-import { FaceMatchState, clearOvalCanvas, drawStaticOval } from '../service';
+} from "@aws-amplify/ui-react";
+import { useColorMode } from "@aws-amplify/ui-react/internal";
+import { FaceMatchState, clearOvalCanvas, drawStaticOval } from "../service";
 import {
   useLivenessActor,
   useLivenessSelector,
   createLivenessSelector,
   useMediaStreamInVideo,
   UseMediaStreamInVideo,
-} from '../hooks';
+} from "../hooks";
 import {
   InstructionDisplayText,
   ErrorDisplayText,
   HintDisplayText,
   StreamDisplayText,
   CameraDisplayText,
-} from '../displayText';
+} from "../displayText";
 
-import { Hint, Overlay, selectErrorState, MatchIndicator } from '../shared';
-import { LivenessClassNames } from '../types/classNames';
+import { Hint, Overlay, selectErrorState, MatchIndicator } from "../shared";
+import { LivenessClassNames } from "../types/classNames";
 import {
   FaceLivenessErrorModal,
   renderErrorModal,
-} from '../shared/FaceLivenessErrorModal';
+} from "../shared/FaceLivenessErrorModal";
 import {
   DefaultPhotosensitiveWarning,
   FaceLivenessDetectorComponents,
   DefaultCancelButton,
   DefaultRecordingIcon,
-} from '../shared/DefaultStartScreenComponents';
+} from "../shared/DefaultStartScreenComponents";
 
 export const selectVideoConstraints = createLivenessSelector(
   (state) => state.context.videoAssociatedParams?.videoConstraints
@@ -136,23 +136,23 @@ export const LivenessCameraModule = (
   const freshnessColorRef = useRef<HTMLCanvasElement | null>(null);
 
   const [isCameraReady, setIsCameraReady] = useState<boolean>(false);
-  const isCheckingCamera = state.matches('cameraCheck');
-  const isWaitingForCamera = state.matches('waitForDOMAndCameraDetails');
-  const isStartView = state.matches('start') || state.matches('userCancel');
-  const isDetectFaceBeforeStart = state.matches('detectFaceBeforeStart');
-  const isRecording = state.matches('recording');
-  const isCheckSucceeded = state.matches('checkSucceeded');
+  const isCheckingCamera = state.matches("cameraCheck");
+  const isWaitingForCamera = state.matches("waitForDOMAndCameraDetails");
+  const isStartView = state.matches("start") || state.matches("userCancel");
+  const isDetectFaceBeforeStart = state.matches("detectFaceBeforeStart");
+  const isRecording = state.matches("recording");
+  const isCheckSucceeded = state.matches("checkSucceeded");
   const isFlashingFreshness = state.matches({
-    recording: 'flashFreshnessColors',
+    recording: "flashFreshnessColors",
   });
 
   // Android/Firefox and iOS flip the values of width/height returned from
   // getUserMedia, so we'll reset these in useLayoutEffect with the videoRef
   // element's intrinsic videoWidth and videoHeight attributes
   const [mediaWidth, setMediaWidth] =
-    useState<UseMediaStreamInVideo['videoWidth']>(videoWidth);
+    useState<UseMediaStreamInVideo["videoWidth"]>(videoWidth);
   const [mediaHeight, setMediaHeight] =
-    useState<UseMediaStreamInVideo['videoHeight']>(videoHeight);
+    useState<UseMediaStreamInVideo["videoHeight"]>(videoHeight);
   const [aspectRatio, setAspectRatio] = useState<number>(() =>
     videoWidth && videoHeight ? videoWidth / videoHeight : 0
   );
@@ -177,25 +177,25 @@ export const LivenessCameraModule = (
     };
 
     const darkModePreference = window.matchMedia(
-      '(prefers-color-scheme: dark)'
+      "(prefers-color-scheme: dark)"
     );
     const lightModePreference = window.matchMedia(
-      '(prefers-color-scheme: light)'
+      "(prefers-color-scheme: light)"
     );
 
-    darkModePreference.addEventListener('change', updateColorModeHandler);
-    lightModePreference.addEventListener('change', updateColorModeHandler);
+    darkModePreference.addEventListener("change", updateColorModeHandler);
+    lightModePreference.addEventListener("change", updateColorModeHandler);
 
     return () => {
-      darkModePreference.removeEventListener('change', updateColorModeHandler);
-      lightModePreference.addEventListener('change', updateColorModeHandler);
+      darkModePreference.removeEventListener("change", updateColorModeHandler);
+      lightModePreference.addEventListener("change", updateColorModeHandler);
     };
   }, [canvasRef, videoRef, videoStream, isStartView]);
 
   React.useLayoutEffect(() => {
     if (isCameraReady) {
       send({
-        type: 'SET_DOM_AND_CAMERA_DETAILS',
+        type: "SET_DOM_AND_CAMERA_DETAILS",
         data: {
           videoEl: videoRef.current,
           canvasEl: canvasRef.current,
@@ -222,7 +222,7 @@ export const LivenessCameraModule = (
 
   const photoSensitivityWarning = React.useMemo(() => {
     return (
-      <View style={{ visibility: isStartView ? 'visible' : 'hidden' }}>
+      <View style={{ visibility: isStartView ? "visible" : "hidden" }}>
         <PhotosensitiveWarning
           bodyText={instructionDisplayText.photosensitivityWarningBodyText}
           headingText={
@@ -241,7 +241,7 @@ export const LivenessCameraModule = (
 
   const beginLivenessCheck = React.useCallback(() => {
     send({
-      type: 'BEGIN',
+      type: "BEGIN",
     });
   }, [send]);
 
@@ -257,7 +257,7 @@ export const LivenessCameraModule = (
           audio: false,
         });
         send({
-          type: 'UPDATE_DEVICE_AND_STREAM',
+          type: "UPDATE_DEVICE_AND_STREAM",
           data: { newDeviceId, newStream },
         });
       };
@@ -269,7 +269,7 @@ export const LivenessCameraModule = (
   if (isCheckingCamera) {
     return (
       <Flex
-        justifyContent={'center'}
+        justifyContent={"center"}
         className={LivenessClassNames.StartScreenCameraWaiting}
       >
         <Loader
@@ -312,7 +312,7 @@ export const LivenessCameraModule = (
         <Overlay
           horizontal="center"
           vertical={
-            isRecording && !isFlashingFreshness ? 'start' : 'space-between'
+            isRecording && !isFlashingFreshness ? "start" : "space-between"
           }
           className={LivenessClassNames.InstructionOverlay}
         >
@@ -340,7 +340,7 @@ export const LivenessCameraModule = (
           {errorState && (
             <ErrorView
               onRetry={() => {
-                send({ type: 'CANCEL' });
+                send({ type: "CANCEL" });
               }}
               displayText={errorDisplayText}
             >
@@ -439,13 +439,24 @@ export const LivenessCameraModule = (
 
       {isStartView && (
         <Flex justifyContent="center">
-          <Button
+          {/* <Button
             variation="primary"
             type="button"
             onClick={beginLivenessCheck}
           >
             {instructionDisplayText.startScreenBeginCheckText}
-          </Button>
+          </Button> */}
+          <button
+            className="amplify-button amplify-field-group__control amplify-button--primary"
+            style={{
+              backgroundColor:
+                "var(--amplify-components-button-primary-background-color) !important",
+            }}
+            type="button"
+            onClick={beginLivenessCheck}
+          >
+            {instructionDisplayText.startScreenBeginCheckText}
+          </button>
         </Flex>
       )}
     </>
