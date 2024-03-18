@@ -1,0 +1,8 @@
+{
+  "include": ["jest.config.ts", "jest.setup.ts", "src/**/*.ts", "src/**/*.tsx"],
+  "exclude": ["node_modules"],
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "jsx": "react"
+  }
+}
