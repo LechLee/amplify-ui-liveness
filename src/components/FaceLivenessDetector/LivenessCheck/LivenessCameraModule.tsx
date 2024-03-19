@@ -439,14 +439,14 @@ export const LivenessCameraModule = (
 
       {isStartView && (
         <Flex justifyContent="center">
-          {/* <Button
+          <Button
             variation="primary"
             type="button"
             onClick={beginLivenessCheck}
           >
             {instructionDisplayText.startScreenBeginCheckText}
-          </Button> */}
-          <button
+          </Button>
+          {/* <button
             className="amplify-button amplify-field-group__control amplify-button--primary"
             style={{
               backgroundColor:
@@ -456,7 +456,7 @@ export const LivenessCameraModule = (
             onClick={beginLivenessCheck}
           >
             {instructionDisplayText.startScreenBeginCheckText}
-          </button>
+          </button> */}
         </Flex>
       )}
     </>
